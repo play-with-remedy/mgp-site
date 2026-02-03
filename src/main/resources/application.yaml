@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: mgp-site
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=mgp
+    username: postgres
+    password: remedy
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        generate_statistics: true,
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+server:
+  port: 4502
