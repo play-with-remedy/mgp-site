@@ -1,22 +1,19 @@
 package com.pwr.mgp.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pwr.mgp.enums.TournamentType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor @AllArgsConstructor
+@ToString(exclude = {"games", "organization"})
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name="tournaments", schema = "mgp")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Tournament {
 
     @Id
@@ -44,7 +41,7 @@ public class Tournament {
     @OrderBy("gameNumber ASC, tableNumber ASC")
     private List<Game> games;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id")
     private Organization organization;
 }

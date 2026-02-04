@@ -2,19 +2,19 @@ package com.pwr.mgp.entity;
 
 import com.pwr.mgp.enums.GameRole;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor @AllArgsConstructor
+@ToString(exclude = {"game", "player"})
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(
         name = "players_games",
         schema = "mgp",
         uniqueConstraints = @UniqueConstraint(name = "uk_game_player", columnNames = {"game_id", "player_id"})
 )
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class GamePlayer {
 
     @Id

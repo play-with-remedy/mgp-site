@@ -2,14 +2,14 @@ package com.pwr.mgp.service.impl;
 
 import com.pwr.mgp.dto.GameDto;
 import com.pwr.mgp.entity.Game;
-import com.pwr.mgp.enums.GameResult;
 import com.pwr.mgp.mapper.GameMapper;
+import com.pwr.mgp.record.GameFilter;
 import com.pwr.mgp.repository.GameRepository;
 import com.pwr.mgp.service.GameService;
 import jakarta.persistence.EntityNotFoundException;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -19,7 +19,6 @@ import java.util.List;
 public class GameServiceImpl implements GameService {
 
     private final GameRepository gameRepository;
-
     private final GameMapper gameMapper;
 
     public GameServiceImpl(GameRepository gameRepository, GameMapper gameMapper) {
@@ -28,8 +27,22 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public List<GameDto> getGames() {
-        return gameMapper.toDto(gameRepository.findAll(Sort.by(Sort.Direction.ASC, "gameNumber", "tableNumber")));
+    public List<GameDto> getGames(GameFilter filter) {
+        Specification<Game> spec = (root, query, cb) -> cb.conjunction();
+
+        Long tournamentId = filter != null ? filter.tournamentId() : null;
+        if (tournamentId != null) {
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("tournament").get("id"), tournamentId));
+        }
+
+        return gameMapper.toDto(gameRepository.findAll(spec));
+    }
+
+    @Override
+    public GameDto getGameById(Long id) {
+        return gameMapper.toDto(gameRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Game not found: " + id)));
     }
 
     @Override

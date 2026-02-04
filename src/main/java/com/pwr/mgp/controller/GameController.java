@@ -2,6 +2,8 @@ package com.pwr.mgp.controller;
 
 import com.pwr.mgp.dto.GameDto;
 import com.pwr.mgp.entity.Game;
+import com.pwr.mgp.record.GameFilter;
+import com.pwr.mgp.record.TournamentFilter;
 import com.pwr.mgp.service.GameService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +21,13 @@ public class GameController {
     }
 
     @GetMapping
-    public List<GameDto> getGames() {
-        return gameService.getGames();
+    public List<GameDto> getGames(@RequestParam(required = false) Long tournamentId) {
+        return gameService.getGames(new GameFilter(tournamentId));
+    }
+
+    @GetMapping("/{id}")
+    public GameDto getGameById(@PathVariable Long id) {
+        return gameService.getGameById(id);
     }
 
     @PostMapping

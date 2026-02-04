@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,4 +15,5 @@ public class GameDto {
     private int gameNumber;
     private String judge;
     private int tableNumber;
+    private List<GamePlayerDto> participants;
 }

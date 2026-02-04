@@ -1,12 +1,8 @@
 package com.pwr.mgp.controller;
 
-import com.pwr.mgp.dto.GameDto;
 import com.pwr.mgp.dto.GamePlayerDto;
-import com.pwr.mgp.entity.Game;
 import com.pwr.mgp.entity.GamePlayer;
 import com.pwr.mgp.service.GamePlayerService;
-import com.pwr.mgp.service.GameService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

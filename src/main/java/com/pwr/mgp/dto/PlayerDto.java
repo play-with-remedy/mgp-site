@@ -12,14 +12,9 @@ import java.time.LocalDate;
 public class PlayerDto {
 
     private Long id;
-
     private String firstName;
-
     private String lastName;
-
     private String nickname;
-
     private LocalDate dateOfBirth;
-
     private String fullName;
 }

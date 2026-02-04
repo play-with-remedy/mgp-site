@@ -3,17 +3,18 @@ package com.pwr.mgp.entity;
 import com.pwr.mgp.enums.GameResult;
 import jakarta.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Entity
-@Table(name="games", schema = "mgp")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"tournament", "participants"})
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Entity
+@Table(name="games", schema = "mgp")
 public class Game {
 
     @Id
@@ -28,7 +29,7 @@ public class Game {
     @Column(name = "game_number")
     private Integer gameNumber;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tournament_id")
     private Tournament  tournament;
 
