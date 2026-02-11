@@ -41,4 +41,19 @@ public class GamePlayer {
 
     @Column(name = "additional_point")
     private Double additionalPoint;
+
+    @Column(name = "yellow_card")
+    private Double yellowCard;
+
+    @Column(name = "red_card")
+    private Double redCard;
+
+    @Column(name = "gray_card")
+    private Double grayCard;
+
+    @Column(name = "violet_card")
+    private Double violetCard;
+
+    @Column(name = "lateness")
+    private Double lateness;
 }

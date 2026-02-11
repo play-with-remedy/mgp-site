@@ -15,5 +15,8 @@ public class GameDto {
     private int gameNumber;
     private String judge;
     private int tableNumber;
+    private PlayerDto firstKilled;
+    private Double compensationIndex;
+    private String bestMove;
     private List<GamePlayerDto> participants;
 }

@@ -41,4 +41,14 @@ public class Game {
 
     @Column(name = "table_number")
     private Integer tableNumber;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id")
+    private Player firstKilled;
+
+    @Column(name = "ci")
+    private Double compensationIndex;
+
+    @Column(name = "best_move")
+    private String bestMove;
 }

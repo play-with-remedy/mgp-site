@@ -44,8 +44,11 @@ public class Player {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "player")
+    @OneToMany(mappedBy = "player", cascade = CascadeType.REMOVE)
     private List<GamePlayer> participations;
+
+    @OneToMany(mappedBy = "firstKilled")
+    private List<Game> firstKills;
 
     @ManyToOne
     @JoinColumn(name = "organization_id")

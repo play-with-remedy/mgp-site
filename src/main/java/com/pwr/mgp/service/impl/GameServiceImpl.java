@@ -2,6 +2,7 @@ package com.pwr.mgp.service.impl;
 
 import com.pwr.mgp.dto.GameDto;
 import com.pwr.mgp.entity.Game;
+import com.pwr.mgp.entity.GamePlayer;
 import com.pwr.mgp.mapper.GameMapper;
 import com.pwr.mgp.record.GameFilter;
 import com.pwr.mgp.repository.GameRepository;
@@ -60,7 +61,17 @@ public class GameServiceImpl implements GameService {
         if (StringUtils.isNotBlank(game.getResult().toString())) g.setResult(game.getResult());
         if (game.getTableNumber() != 0) g.setTableNumber(game.getTableNumber());
         if (game.getTournament() != null) g.setTournament(game.getTournament());
-        if (!CollectionUtils.isEmpty(game.getParticipants())) g.getParticipants().addAll(game.getParticipants());
+        if (game.getFirstKilled() != null) g.setFirstKilled(game.getFirstKilled());
+        if (StringUtils.isNotBlank(game.getBestMove())) g.setBestMove(game.getBestMove());
+        if (game.getCompensationIndex() != null) g.setCompensationIndex(game.getCompensationIndex());
+        if (!CollectionUtils.isEmpty(game.getParticipants())) {
+            g.getParticipants().clear();
+
+            for (var p : game.getParticipants()) {
+                p.setGame(g);
+                g.getParticipants().add(p);
+            }
+        }
         
         return gameMapper.toDto(gameRepository.save(g));
     }
