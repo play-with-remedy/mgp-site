@@ -41,7 +41,25 @@ public class PlayerServiceImpl implements PlayerService {
             spec = spec.and((root, query, cb) -> cb.equal(root.get("organization").get("id"), orgId));
         }
 
+        Long tournamentId = filter != null ? filter.tournamentId() : null;
+        if (tournamentId != null) {
+            spec = spec.and((root, query, cb) -> {
+                // чтобы не получить дубли игрока из-за join'а
+                query.distinct(true);
+
+                var reg = root.join("tournamentRegistrations");          // List<TournamentPlayer>
+                var tournament = reg.get("tournament");                  // Tournament
+                return cb.equal(tournament.get("id"), tournamentId);
+            });
+        }
+
         return playerMapper.toDto(playerRepository.findAll(spec, sort));
+    }
+
+    @Override
+    public PlayerDto getPlayerById(Long id) {
+        return playerMapper.toDto(playerRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Player not found: " + id)));
     }
 
     @Override
@@ -65,7 +83,17 @@ public class PlayerServiceImpl implements PlayerService {
         if (StringUtils.isNotBlank(player.getNickname())) p.setNickname(player.getNickname());
         if (StringUtils.isNotBlank(player.getLastName())) p.setLastName(player.getLastName());
         if (StringUtils.isNotBlank(player.getFirstName())) p.setFirstName(player.getFirstName());
+        if (StringUtils.isNotBlank(player.getQuotation())) p.setQuotation(player.getQuotation());
         if (player.getDateOfBirth() != null) p.setDateOfBirth(player.getDateOfBirth());
+        if (player.getStartDate() != null) p.setStartDate(player.getStartDate());
+        if (player.getBirthdateVisibility() != null) p.setBirthdateVisibility(player.getBirthdateVisibility());
+        if (player.getOrganization() != null) {
+            if (player.getOrganization().getId() != null) {
+                p.setOrganization(player.getOrganization());
+            } else {
+                p.setOrganization(null);
+            }
+        }
 
         return playerMapper.toDto(playerRepository.save(p));
     }

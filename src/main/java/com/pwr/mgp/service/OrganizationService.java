@@ -1,6 +1,6 @@
 package com.pwr.mgp.service;
 
-import com.pwr.mgp.dto.OrganizationDto;
+import com.pwr.mgp.dto.organization.OrganizationDto;
 import com.pwr.mgp.entity.Organization;
 
 import java.util.List;

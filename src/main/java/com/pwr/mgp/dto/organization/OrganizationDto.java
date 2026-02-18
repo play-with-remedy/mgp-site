@@ -1,5 +1,6 @@
-package com.pwr.mgp.dto;
+package com.pwr.mgp.dto.organization;
 
+import com.pwr.mgp.dto.PlayerDto;
 import com.pwr.mgp.enums.OrganizationType;
 import lombok.AllArgsConstructor;
 import lombok.Data;

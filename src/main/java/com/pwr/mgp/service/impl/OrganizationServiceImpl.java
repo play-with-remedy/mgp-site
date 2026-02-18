@@ -1,8 +1,8 @@
 package com.pwr.mgp.service.impl;
 
-import com.pwr.mgp.dto.OrganizationDto;
+import com.pwr.mgp.dto.organization.OrganizationDto;
 import com.pwr.mgp.entity.Organization;
-import com.pwr.mgp.mapper.OrganizationMapper;
+import com.pwr.mgp.mapper.organization.OrganizationMapper;
 import com.pwr.mgp.mapper.PlayerMapper;
 import com.pwr.mgp.mapper.TournamentMapper;
 import com.pwr.mgp.repository.OrganizationRepository;

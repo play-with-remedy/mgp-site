@@ -1,6 +1,8 @@
 package com.pwr.mgp.service;
 
+import com.pwr.mgp.dto.TeamDto;
 import com.pwr.mgp.dto.TournamentDto;
+import com.pwr.mgp.entity.Team;
 import com.pwr.mgp.entity.Tournament;
 import com.pwr.mgp.record.TournamentFilter;
 
@@ -15,5 +17,9 @@ public interface TournamentService {
     TournamentDto addTournament(Tournament tournament);
 
     TournamentDto updateTournament(Long id, Tournament tournament);
+
+    List<TeamDto> getTournamentTeams(Long id);
+
+    TournamentDto createTournamentTeam(Long id, Team team);
 
 }

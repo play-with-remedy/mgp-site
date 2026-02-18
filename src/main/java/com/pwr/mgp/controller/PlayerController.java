@@ -22,10 +22,14 @@ public class PlayerController {
     }
 
     @GetMapping
-    public List<PlayerDto> getPlayers(@RequestParam(required = false) Long organizationId) {
-        return playerService.getPlayers(new PlayerFilter(organizationId));
+    public List<PlayerDto> getPlayers(@RequestParam(required = false) Long organizationId, @RequestParam(required = false) Long tournamentId) {
+        return playerService.getPlayers(new PlayerFilter(organizationId, tournamentId));
     }
 
+    @GetMapping("/{id}")
+    public PlayerDto getPlayers(@PathVariable Long id) {
+        return playerService.getPlayerById(id);
+    }
 
     @PostMapping
     public PlayerDto addPlayer(@RequestBody @NotNull Player player) {

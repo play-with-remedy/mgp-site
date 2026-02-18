@@ -10,6 +10,8 @@ public interface PlayerService {
 
     List<PlayerDto> getPlayers(PlayerFilter playerFilter);
 
+    PlayerDto getPlayerById(Long id);
+
     PlayerDto addPlayer(Player player);
 
     PlayerDto updatePlayerById(Long id, Player player);

@@ -1,6 +1,6 @@
 package com.pwr.mgp.controller;
 
-import com.pwr.mgp.dto.OrganizationDto;
+import com.pwr.mgp.dto.organization.OrganizationDto;
 import com.pwr.mgp.entity.Organization;
 import com.pwr.mgp.service.OrganizationService;
 import org.springframework.http.ResponseEntity;
